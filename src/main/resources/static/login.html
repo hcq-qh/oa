@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!--vue开发环境版本，包含了有帮助的命令行警告-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script src="js/vue-router.js"></script>
+</head>
+<body background="imges/bei.jpg" style="background-repeat: no-repeat;background-size: 100%">
+<h1 align="center" style="margin-top: 150px;color: aliceblue">OA管理系统</h1>
+<!-- 登录表单 -->
+<div style="width:100%;text-align:center;margin-top: 100px" id="app">
+    <form>
+        <div class="form-group">
+            <label for="user" stype="display:inline;">账户：</label>
+            <input type="text" class="form-control" id="user" style="display:inline;width:200px;" autocomplete="off"
+                   name="username" v-model="zhang"/>
+        </div>
+        <div class="form-group">
+            <label for="password" style="display:inline;">密码：</label>
+            <input type="password" class="form-control" id="password" style="display:inline;width:200px;"
+                   autocomplete="off" name="password" v-model="mi"/>
+        </div>
+        <button type="submit" class="btn btn-primary" @click="login">登录</button>
+        <button type="button" class="btn btn-primary" @click="register">注册</button>
+    </form>
+</div>
+
+<script>
+    // var routerObj = new VueRouter({
+    //      routes:{
+    //
+    //      }
+    //
+    // })
+
+    var vm = new Vue(
+        {
+            el: "#app",
+            data: {
+                agg: "aaaaaaaaaaaa",
+                zhang: "",
+                mi: ""
+            },
+            methods: {
+                login: function () {
+                    window.location.href = ""
+                },
+                register: function () {
+                    // this.$router.push("/main.html")
+                    console.log(11111111);
+                    location.href="register.html";
+                    //window.open("register.html","_block")
+                },
+
+            }
+
+
+        }
+    )
+
+</script>
+</body>
+</html>
