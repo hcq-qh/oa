@@ -99,6 +99,14 @@ public class User implements Serializable {
         this.password = password == null ? null : password.trim();
     }
 
+    public User( String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
+
+    public User() {
+    }
+
     @Override
     public String toString() {
         return "User{" +

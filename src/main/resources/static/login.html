@@ -13,14 +13,14 @@
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <!--vue开发环境版本，包含了有帮助的命令行警告-->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
     <script src="js/vue-router.js"></script>
 </head>
 <body background="imges/bei.jpg" style="background-repeat: no-repeat;background-size: 100%">
 <h1 align="center" style="margin-top: 150px;color: aliceblue">OA管理系统</h1>
 <!-- 登录表单 -->
 <div style="width:100%;text-align:center;margin-top: 100px" id="app">
-    <form>
+    <form onsubmit="return false;">
         <div class="form-group">
             <label for="user" stype="display:inline;">账户：</label>
             <input type="text" class="form-control" id="user" style="display:inline;width:200px;" autocomplete="off"
@@ -31,7 +31,7 @@
             <input type="password" class="form-control" id="password" style="display:inline;width:200px;"
                    autocomplete="off" name="password" v-model="mi"/>
         </div>
-        <button type="submit" class="btn btn-primary" @click="login">登录</button>
+        <button type="button" class="btn btn-primary" @click="login">登录</button>
         <button type="button" class="btn btn-primary" @click="register">注册</button>
     </form>
 </div>
@@ -48,17 +48,25 @@
         {
             el: "#app",
             data: {
-                agg: "aaaaaaaaaaaa",
+                // agg: "aaaaaaaaaaaa",
                 zhang: "",
                 mi: ""
             },
             methods: {
                 login: function () {
-                    window.location.href = ""
+                    // window.location.href = "main.html"
+                    this.$http.post('userlogin',{username:this.zhang,password:this.mi},{emulateJSON:true}).then(function(res){
+                            if(res.data.data != null){
+                                location.href = "main.html"
+                            }else {
+                                alert("您输入的账号或密码有误，请重新输入")
+                            }},function(){
+                        console.log('请求失败处理');
+                    });
                 },
                 register: function () {
                     // this.$router.push("/main.html")
-                    console.log(11111111);
+                    // console.log(11111111);
                     location.href="register.html";
                     //window.open("register.html","_block")
                 },

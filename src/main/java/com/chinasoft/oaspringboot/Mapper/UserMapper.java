@@ -2,6 +2,7 @@ package com.chinasoft.oaspringboot.Mapper;
 
 import com.chinasoft.oaspringboot.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -48,4 +49,6 @@ public interface UserMapper {
      * @mbggenerated Tue Sep 24 14:51:35 CST 2019
      */
     int updateByPrimaryKey(User record);
+
+    User loginByUser(@Param("name") String name,@Param("password") String password);
 }

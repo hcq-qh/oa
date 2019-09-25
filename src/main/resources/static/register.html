@@ -13,7 +13,7 @@
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <!--vue开发环境版本，包含了有帮助的命令行警告-->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
     <script src="js/vue-router.js"></script>
     <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
 
@@ -23,7 +23,7 @@
 <h1 align="center" style="margin-top: 150px;color: aliceblue">OA管理系统</h1>
 <!-- 注册表单 -->
 <div style="width:100%;text-align:center;margin-top: 100px" id="app">
-    <form>
+    <form onsubmit="return false;">
         <div class="form-group">
             <label for="user" stype="display:inline;">账户：</label>
             <input type="text" class="form-control" id="user" style="display:inline;width:200px;" autocomplete="off"
@@ -44,36 +44,67 @@
         {
             el: "#app",
             data: {
-                agg: "aaaaaaaaaaaa",
                 zhang: "",
                 mi: ""
             },
             methods: {
+
                 register: function () {
-                    var d = {};
-                    d.username = this.zhang;
-                    d.password = this.mi;
-                    $.ajax({
-                        url: "sss",
-                        data: JSON.stringify(d),
-                        //type、contentType必填,指明传参方式
-                        dataType:'json',
-                        type: "POST",
-                        contentType: "application/json;charset=utf-8",
-                        success: function (date) {
-                            //前端调用成功后，可以处理后端传回的json格式数据。
-                            // console.log(date.name)
-                            // console.log(date.toString())
-                            // console.log(date.valueOf())
-                            console.log(date.data.name)
-                            console.log(111)
-                            // console.log(date.username)
-
-
+                    // var username="";
+                    // var password="";
+                    // var d = {};
+                    // d.username = this.zhang;
+                    // d.password = this.mi;
+                    this.$http.post('userregister',{username:this.zhang,password:this.mi},{emulateJSON:true}).then(function(res){
+                        console.log(res.data.data);
+                        if (res.data.data == 1){
+                            alert("您已注册成功")
+                            location.href = "login.html"
+                        } else {
+                            alert("注册失败")
                         }
+                        // if(res.data.data != null){
+                        //     location.href = "main.html"
+                        // }else {
+                        //     alert("您输入的账号或密码有误，请重新输入")
+                        // }
+                        // console.log(res.data.state)
+                        // console.log(res.data.data.password)
+                        // if (this.zhang == res.data.data.name && this.mi ==res.data.data.password){
+                        //     location.href = "main.html"
+                        // }else {
+                        //     alert("账号或密码输入有误")
+                        // }
+                    },function(){
+                        console.log('请求失败处理');
                     });
+
+                    // $.ajax({
+                    //     url: "sss",
+                    //     data: JSON.stringify(d),
+                    //     //type、contentType必填,指明传参方式
+                    //     dataType:'json',
+                    //     type: "POST",
+                    //     contentType: "application/json;charset=utf-8",
+                    //     success: function (date) {
+                    //         //前端调用成功后，可以处理后端传回的json格式数据。
+                    //         // console.log(date.name)
+                    //         // console.log(date.toString())
+                    //         // console.log(date.valueOf())
+                    //         console.log(date.data.name)
+                    //         console.log(date.data.code)
+                    //         console.log(111)
+                    //         // console.log(date.username)
+                    //         if ("aaa"  == date.data.name){
+                    //           alert(1111111111);
+                    //         }
+                    //
+                    //     }
+                    // });
+
                 }
             }
+
         }
     )
 

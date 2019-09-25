@@ -36,15 +36,15 @@ public class UserServiceImpl implements UserService {
         boolean haskey=redisTemplate.hasKey(key);
         if (haskey) {
             User user = operations.get(key);
-            System.out.println("==========从缓存中获得数据=========");
-            System.out.println(user.getName());
-            System.out.println("==============================");
+//            System.out.println("==========从缓存中获得数据=========");
+//            System.out.println(user.getName());
+//            System.out.println("==============================");
             return user;
         } else {
             User user = userMapper.selectByPrimaryKey(1);
-            System.out.println("==========从数据表中获得数据=========");
-            System.out.println(user.getName());
-            System.out.println("==============================");
+//            System.out.println("==========从数据表中获得数据=========");
+//            System.out.println(user.getName());
+//            System.out.println("==============================");
 
             // 写入缓存
             operations.set(key, user,5, TimeUnit.HOURS);
@@ -60,5 +60,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateByPrimaryKey(User record) {
         return 0;
+    }
+
+    @Override
+    public User loginByUser(String name, String password) {
+        String key = "user_login_" + name;
+        ValueOperations<String, User> operations=redisTemplate.opsForValue();
+
+        boolean hasKey=redisTemplate.hasKey(key);
+        if (hasKey) {
+            User user = operations.get(key);
+//            System.out.println("==========从缓存中获得数据=========");
+//            System.out.println(user.getName());
+//            System.out.println("==============================");
+            return user;
+        } else {
+            User user = userMapper.selectByPrimaryKey(1);
+//            System.out.println("==========从数据表中获得数据=========");
+//            System.out.println(user.getName());
+//            System.out.println("==============================");
+            // 写入缓存
+            operations.set(key, user,5, TimeUnit.HOURS);
+            return user;
+        }
     }
 }

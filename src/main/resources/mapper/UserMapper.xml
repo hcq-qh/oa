@@ -61,4 +61,9 @@
     select id, name, password
     from user_tb
   </select>
+  <select id="loginByUser" resultType="com.chinasoft.oaspringboot.entity.User">
+    select id, name, password
+    from user_tb where name = #{name,jdbcType=VARCHAR} and
+      password = #{password,jdbcType=VARCHAR}
+  </select>
 </mapper>

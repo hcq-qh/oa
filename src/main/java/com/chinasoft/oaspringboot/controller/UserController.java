@@ -7,10 +7,7 @@ import com.chinasoft.oaspringboot.serice.UserService;
 import com.chinasoft.oaspringboot.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,16 +21,27 @@ public class UserController {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    private Map<String,Object> modelmap = new HashMap<String, Object>();
+    private Map<String, Object> modelmap = new HashMap<String, Object>();
 
-    @RequestMapping("/sss")
+    @RequestMapping("/userlogin")
     @ResponseBody
-    public JsonResult<User> selectInfoForUser(@RequestBody JSONObject params) {
-        String name = params.getString("username");
-        User userInfo = userMapper.selectByPrimaryKey(1);
-        System.out.print(name);
-        System.out.print(userInfo);
-        return new JsonResult<User>(0, "成功", userInfo);
+//    public JsonResult<User> selectInfoForUser(@RequestBody JSONObject params) {
+    public JsonResult<User> selectInfoForUser(@RequestParam("username") String name,@RequestParam("password") String password) {
+//        String name = params.getString("username");
+//        String password = params.getString("password");
+        User u = userService.loginByUser(name, password);
+//        System.out.print(name);
+        return new JsonResult<User>(0, "成功", u);
     }
 
+    @RequestMapping("/userregister")
+    @ResponseBody
+    public JsonResult<Integer> registerUser(@RequestParam("username") String name,@RequestParam("password") String password) {
+//        String name = params.getString("username");
+//        String password = params.getString("password");
+          User u = new User(name,password);
+          int i = userMapper.insert(u);
+//        System.out.print(name);
+        return new JsonResult<Integer>(0, "成功", i);
+    }
 }
