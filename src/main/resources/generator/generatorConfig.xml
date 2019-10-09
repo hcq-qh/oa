@@ -34,7 +34,8 @@
 
             <!--数据库中的表名称和对应的实体类名称-->
         </javaClientGenerator>
-        <table tableName="user_tb" domainObjectName="User"></table>
+        <table tableName="emp_tb" domainObjectName="Emp"></table>
+        <table tableName="dept_tb" domainObjectName="Dept"></table>
 
     </context>
 </generatorConfiguration>

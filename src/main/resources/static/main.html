@@ -3,8 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: "Microsoft Yahei", "SimSun", Arial;
+            font-size: 12px;
+            overflow: hidden;
+        }
+
+        body, h3, ul, li {
+            margin: 0;
+            padding: 0;
+        }
+
+        h3, th {
+            font-weight: normal;
+        }
+
+        ul,ul li {
+            list-style-type: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .header {
+            width: 100%;
+            height: 50px;
+            position: absolute;
+            top: 0;
+            /*以上设置是重点必须的*/
+            line-height: 50px;
+        }
+
+        .header h3 {
+            margin-left: 12px;
+            color: #0075C7;
+        }
+
+        .mainBox {
+            width: 100%;
+            position: absolute;
+            top: 50px;
+            bottom: 0;
+            /*以上设置是重点必须的*/
+        }
+
+        .mainBox .leftBox {
+            height: 100%;
+            width: 240px;
+            float: left;
+            overflow: auto;
+            /*以上设置是重点必须的*/
+            background: #f8f8ee;
+            font-size: 12px;
+            font-family: "Microsoft Yahei", "SimSun", Arial;
+            border-right: 1px solid #D9D9D9;
+            border-top: 1px solid #D9D9D9;
+        }
+
+        .menuItem a, .menuItem a:visited {
+            padding-left: 20px;
+            width: 220px;
+            height: 32px;
+            background-color: #f8f8f8;
+            border-bottom: solid 1px #EAEAEA;
+            border-top: solid 1px #FFFFFF;
+            display: block;
+            line-height: 32px;
+            color: #000000;
+        }
+
+        .menuItem a:hover, .menuItem a:active {
+            background: #f2f2f2;
+            color: #0075c7;
+        }
+
+        .menuItem img {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .mainBox .rightBox {
+            height: 100%;
+            margin-left: 241px;
+            /*以上设置是重点必须的*/
+            padding-right: 1px;
+            padding-left: 1px;
+            border-left: 1px solid #E6E6E6;
+            border-top: 1px solid #D9D9D9;
+            overflow: auto;
+        }
+
+        .slideBtn {
+            cursor: pointer;
+            width: 1em;
+            position: absolute;
+            top: 40%;
+            left: 1px;
+            display: block;
+        }
+    </style>
 </head>
 <body>
-aaaaaaaaaaaaaaaa
+
+<div class="header">
+    <h3>
+        OA办公管理系统
+    </h3>
+</div>
+<div class="mainBox">
+    <div class="leftBox" ref="aaa">
+        <div class="menuItem zzjg">
+            <a href="html/emp/emain.html">员工管理</a>
+        </div>
+        <div class="menuItem ygfc">
+            <a href="#">部门管理</a>
+        </div>
+        <div class="menuItem wghf">
+            <a href="#">权限设置</a>
+        </div>
+        <div class="menuItem xxyd">
+            <a href="#">未完待续</a>
+        </div>
+        <div class="menuItem tzgg">
+            <a href="#">未完待续</a>
+        </div>
+        <div class="menuItem xwzx">
+            <a href="http://www.gz121.gov.cn/gqqx/hzq/zwgk_99/qxxw_104/"
+               target="_blank">未完待续</a>
+        </div>
+    </div>
+    <div class="rightBox" id="rightBox" ref="abc">
+        <div class="slideBtn">伸缩</div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    //左侧菜单栏伸缩效果
+    $('.slideBtn').click(
+        function() {
+            $('.leftBox').toggle();
+            var status = $('.leftBox').css("display");
+            if (status == 'none') {
+                $('.rightBox').css("marginLeft", "0");
+                $(this).css("background",
+                    "red");
+            } else {
+                $('.rightBox').css("marginLeft", "241px");
+                $(this).css("background",
+                    "green");
+            }
+        });
+
+    // var  vm = new Vue({
+    //
+    //     el: "#rightBox",
+    //     data: {
+    //
+    //     },
+    //     methods:{
+    //         shen:function() {
+    //             alert(this.$refs.aaa.style.display)
+    //             alert(11)
+    //         }
+    //     }
+    // })
+</script>
 </body>
 </html>

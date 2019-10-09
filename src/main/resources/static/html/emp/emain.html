@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+</head>
+<body>
+<div id="app" style="margin:0 auto;width: 600px;height: 300px">
+    <table id="tab" style="border: black solid 1px;text-align: center">
+        <tr>
+            <td>编号</td>
+            <td>姓名</td>
+            <td>年纪</td>
+            <td>部门编号</td>
+            <td>操作</td>
+        </tr>
+    </table>
+    <a href="#">增加</a>
+</div>
+
+<script>
+    var vc = new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+            index: function () {
+                this.$http.post('../../empmain', {emulateJSON: true}).then(function (res) {
+                    var str = "";
+                    for (var i = 0; i < res.data.data.length; i++) {
+                        str = "<tr><td>" + res.data.data[i].eid + "</td><td>" + res.data.data[i].ename + "</td><td>" + res.data.data[i].age + "</td><td>" + res.data.data[i].did + "</td><td>" + "<a href='../../delectemp?id="+res.data.data[i].eid+"'>删除</a><a href='#'>修改</a>" + "</td></tr>"
+                        //追加到table中
+                        $("#tab").append(str);
+                    }
+                }, function () {
+                    console.log('请求失败处理');
+
+                });
+            }
+        },
+        created() {
+            this.index();
+        }
+
+
+    })
+
+
+</script>
+</body>
+</html>
